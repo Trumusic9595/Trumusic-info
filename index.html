@@ -78,7 +78,6 @@
             color: black;
             transform: scale(1.05);
         }
-
         /* Custom audio player styles */
         audio::-webkit-media-controls-panel {
             background-color: black;
@@ -104,7 +103,6 @@
             background-color: white;
             border-radius: 50%;
         }
-
         /* Firefox specific styles */
         @-moz-document url-prefix() {
             audio {
@@ -112,6 +110,48 @@
                 border: 2px solid white;
                 border-radius: 25px;
             }
+        }
+        /* Updated Full screen lyrics styling */
+        .lyrics-fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            overflow-y: auto;
+            padding: 60px 20px 20px;
+            box-sizing: border-box;
+        }
+        .lyrics-fullscreen p {
+            font-size: 24px;
+            margin: 10px 0;
+            max-width: 800px;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+        .lyrics-fullscreen .highlight {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .close-fullscreen {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.5);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
         }
     </style>
 </head>
@@ -123,57 +163,220 @@
 
     <!-- Links with buttons -->
     <div class="button-container">
-    <a href="https://www.instagram.com/truequotetheartist22?igsh=aDczd3oxOGk3ODFo" class="button">
-        <span><strong>INSTAGRAM</strong></span>
-    </a>
+        <a href="https://www.instagram.com/truequotetheartist22?igsh=aDczd3oxOGk3ODFo" class="button">
+            <span><strong>INSTAGRAM</strong></span>
+        </a>
+        <a href="https://youtube.com/@truequotetheartist?si=HDpXFYuP2DNqQ39R" class="button">
+            <span><strong>YOUTUBE</strong></span>
+        </a>
+        <a href="https://www.tiktok.com/@truequotetheartist?_t=8pThPdxHywg&_r=1" class="button">
+            <span><strong>TIKTOK</strong></span>
+        </a>
+        <a href="https://trumusic9595.github.io/Trumusic-info2/" class="button">
+            <span><strong>MORE INFO</strong></span>
+        </a>
+        <a href="https://cash.app/$TrueQB" target="_blank" class="button">
+            <span><strong>CASHAPP</strong></span>
+        </a>
+    </div>
 
-    <a href="https://youtube.com/@truequotetheartist?si=HDpXFYuP2DNqQ39R" class="button">
-        <span><strong>YOUTUBE</strong></span>
-    </a>
-
-    <a href="https://www.tiktok.com/@truequotetheartist?_t=8pThPdxHywg&_r=1" class="button">
-        <span><strong>TIKTOK</strong></span>
-    </a>
- 
-    <a href="https://trumusic9595.github.io/Trumusic-info2/" class="button">
-        <span><strong>MORE INFO</strong></span>
-    </a>
-   
-   <a href="https://cash.app/$TrueQB" target="_blank" class="button">
-    <span><strong>CASHAPP</strong></span>
-</a>
-
-</div>
     <h2>WU-TANG REMIXES</h2>
     <ul class="playlist">
         <li>
-            <h3>Track 1: Unhinged - GZA REMIX (by True Quote)</h3>
-            <audio controls>
+            <h3>(MOST RECENT) Track 1: Unhinged - GZA REMIX (by True Quote)</h3>
+            <audio controls id="audio1">
                 <source src="https://raw.githubusercontent.com/Trumusic9595/Trumusic-info/main/Unhinged.%20-%20GZA%20REMIX%20(by%20True%20Quote)%20(1).mp3" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
+            <button onclick="toggleLyrics('lyrics1')" class="button">
+                <span><strong>Show/Hide Lyrics</strong></span>
+            </button>
         </li>
         <li>
             <h3>Track 2: RZA DO U REMIX (TQ)</h3>
-            <audio controls>
+            <audio controls id="audio2">
                 <source src="https://raw.githubusercontent.com/Trumusic9595/Trumusic-info/main/Ismaell%20Bethencourt%20-%20RZA%20DO%20U%20REMIX%20(TQ)%202024-08-24%2002_27.m4a" type="audio/mp4">
                 Your browser does not support the audio element.
             </audio>
+            <button onclick="toggleLyrics('lyrics2')" class="button">
+                <span><strong>Show/Hide Lyrics</strong></span>
+            </button>
         </li>
         <li>
             <h3>Track 3: Liquid Sword Remix</h3>
-            <audio controls>
+            <audio controls id="audio3">
                 <source src="https://raw.githubusercontent.com/Trumusic9595/Trumusic-info/main/Ismaell%20Bethencourt%20-%20Liquid%20Sword%20Remix%202024-08-24%2021_59.mp3" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
+            <button onclick="toggleLyrics('lyrics3')" class="button">
+                <span><strong>Show/Hide Lyrics</strong></span>
+            </button>
         </li>
         <li>
             <h3>Track 4: Goin in. - ODB REMIX (by TRUE QUOTE)</h3>
-            <audio controls>
+            <audio controls id="audio4">
                 <source src="https://raw.githubusercontent.com/Trumusic9595/Trumusic-info/main/Ismaell%20Bethencourt%20-%20Goin%20in.%20-%20ODB%20REMIX%20(by%20TRUE%20QUOTE)%202024-08-24%2019_10.m4a" type="audio/mp4">
                 Your browser does not support the audio element.
             </audio>
+            <button onclick="toggleLyrics('lyrics4')" class="button">
+                <span><strong>Show/Hide Lyrics</strong></span>
+            </button>
         </li>
     </ul>
+
+    <script>
+        const lyrics = {
+            'lyrics1': [
+                { time: 14, text: "I'm a visionary, with the ability of foresight," },
+                { time: 17, text: "I give em every lyric direct unlimited forthright," },
+                { time: 19.5, text: "I guess I'll let you visit my mental prison but forth right," },
+                { time: 22, text: "suggests I'd keep it hidden but let us listen to Quote rhyme," },
+                { time: 25, text: "a pistol couldn't clip it as fresh as I kill it all the time" },
+                { time: 27.3, text: "prolific bullet points will connect with limited crossfire" },
+                { time: 30, text: "with the ones remaining I got to inspire" },
+                { time: 32, text: "because these lost survivors turned to outsiders," },
+                { time: 33.5, text: "and won't know why they're watching all those" },
+                { time: 35.2, text: "false idols, blowing up viral before their vitals drop" },
+                { time: 37.2, text: "through drugs spiralling, spurring violence" },
+                { time: 39.2, text: "more than the spike to clutch a horses side to ride" },
+                { time: 41, text: "until they're tired in the long run..." },
+                { time: 43.3, text: "life's a fuckin' marathon," },
+                { time: 45, text: "so from my auxiliary i'm kickin' artillery with a silver tongue," },
+                { time: 48, text: "within proximity the mix and frequency will reach the ones" },
+                { time: 50, text: "who need some liberation, my innovation" },
+                { time: 52, text: "will make you sit and ponder all creation" },
+                { time: 55, text: "I utilize my tools everyday for self-maintenance" },
+                { time: 56.8, text: "cuz my heart is in it, fixing a proximal palpitation" },
+                { time: 59.5, text: "i'm mentally rich and thoughts are immensely brought to existence" },
+                { time: 61.8, text: "a blessing and gift from God in my head Allah is the presence(present)" },
+                { time: 65, text: "an entity which defies all endeavor the vessel witnesses" },
+                { time: 68, text: "physical medium is the vehicle that delivers" },
+                { time: 69, text: "spitting raw material, but i'm not materialistic" },
+                { time: 72.5, text: "I plant a seed through my actions to speak about knowledge, wisdom" },
+                { time: 75, text: "the grander scheme will grant you to see" },
+                { time: 76, text: "what i've brought into fruition" },
+                { time: 78, text: "it's a masterpiece you'll catch in the scheme of the best written," },
+                { time: 80., text: "a masterpiece you can't check King or capture his essence," },
+                { time: 83, text: "i'm the eminent being," },
+                { time: 84, text: "in a game of chess against the reverend," },
+                { time: 86, text: "and I never did preach," },
+                { time: 87, text: "ever with speech and yet the heaven's sing" },
+                { time: 88, text: "and choirs would teach, prior to my admired confession" },
+                { time: 91, text: "it's inevitable," },
+                { time: 93, text: "i'm elevating the rap profession" },
+                { time: 94, text: "unquestionable, the elevation passes Mt.Everest," },
+                { time: 97, text: "and my atmosphere is staggering studied by your professors," },
+                { time: 99, text: "you had to hear," },
+                { time: 100, text: "the grammar that's leaving a cloud of remnants," },
+                { time: 102, text: "family trees of cannibus weeding out your descendants" },
+                
+                // ... (continue with the rest of the lyrics for Track 1)
+            ],
+            'lyrics2': [
+                { time: 20, text: "My mind is focused," },
+                { time: 21, text: "like a loaded revolver," },
+                { time: 22, text: "and it's out of the holster," },
+                { time: 22.8, text: "ready to blow clips," },
+                { time: 23.8, text: "how i'm dropping this knowledge," },
+                // ... (continue with the rest of the lyrics for Track 2)
+            ],
+            'lyrics3': [
+                { time: 21, text: "I'm living in a 1 bed unit as a resident," },
+                { time: 23.5, text: "bills for the rent have been due since I was settled in," },
+                { time: 26, text: "and still I get a check for the room and i'm giving every cent" },
+                { time: 29, text: "i've made for the past two payments, I tell myself to save" },
+                { time: 32, text: "for the sake of rainy days but it only lasted two days again," },
+                // ... (continue with the rest of the lyrics for Track 3)
+            ],
+            'lyrics4': [
+                { time: 16, text: "The labor I produce is self-taught with sheer delusion," },
+                { time: 18.7, text: "tailored for the true and you got to follow suite when," },
+                { time: 21, text: "the style is original I never been a duplicate," },
+                { time: 23.5, text: "they say I got the juice like kumquat and pear fusion," },
+                { time: 26, text: "even with the fruit you bare there's no comparison," },
+                // ... (continue with the rest of the lyrics for Track 4)
+            ]
+        };
+
+        function toggleLyrics(lyricsId) {
+            const audioId = lyricsId.replace('lyrics', 'audio');
+            const audio = document.getElementById(audioId);
+            
+            if (document.querySelector('.lyrics-fullscreen')) {
+                hideFullscreenLyrics();
+            } else {
+                showFullscreenLyrics(lyricsId, audio);
+            }
+        }
+
+        function showFullscreenLyrics(lyricsId, audio) {
+            const fullscreenLyrics = document.createElement('div');
+            fullscreenLyrics.className = 'lyrics-fullscreen';
+            
+            const trackLyrics = lyrics[lyricsId];
+            trackLyrics.forEach(line => {
+                const p = document.createElement('p');
+                p.textContent = line.text;
+                p.dataset.time = line.time;
+                fullscreenLyrics.appendChild(p);
+            });
+            
+            const closeButton = document.createElement('span');
+            closeButton.className = 'close-fullscreen';
+            closeButton.innerHTML = '&times;';
+            closeButton.onclick = hideFullscreenLyrics;
+            
+            fullscreenLyrics.insertBefore(closeButton, fullscreenLyrics.firstChild);
+            document.body.appendChild(fullscreenLyrics);
+            document.body.style.overflow = 'hidden';
+
+            audio.addEventListener('timeupdate', () => syncLyrics(fullscreenLyrics, audio.currentTime));
+        }
+
+        function hideFullscreenLyrics() {
+            const fullscreenLyrics = document.querySelector('.lyrics-fullscreen');
+            if (fullscreenLyrics) {
+                fullscreenLyrics.remove();
+                document.body.style.overflow = '';
+            }
+        }
+
+        function syncLyrics(lyricsElement, currentTime) {
+            const lines = lyricsElement.querySelectorAll('p');
+            let activeLineIndex = -1;
+
+            for (let i = 0; i < lines.length; i++) {
+                const lineTime = parseFloat(lines[i].dataset.time);
+                if (lineTime <= currentTime) {
+                    activeLineIndex = i;
+                } else {
+                    break;
+                }
+            }
+
+            lines.forEach((line, index) => {
+                if (index === activeLineIndex) {
+                    line.classList.add('highlight');
+                    line.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    line.classList.remove('highlight');
+                }
+            });
+        }
+
+            document.addEventListener('DOMContentLoaded', () => {
+            const audioElements = document.querySelectorAll('audio');
+            
+            audioElements.forEach(audio => {
+                audio.addEventListener('play', () => {
+                    audioElements.forEach(otherAudio => {
+                        if (otherAudio !== audio) {
+                            otherAudio.pause();
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 </body>
-</html>
+</html>      
